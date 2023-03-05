@@ -9,8 +9,8 @@ struct ringbuffer {
 };
 
 void rb_init(struct ringbuffer *p, void *buf, unsigned int cap);
-int rb_put(struct ringbuffer *p, void *buf, unsigned int len);
-int rb_get(struct ringbuffer *p, void *buf, unsigned int len);
+unsigned int rb_put(struct ringbuffer *p, void *buf, unsigned int len);
+unsigned int rb_get(struct ringbuffer *p, void *buf, unsigned int len);
 unsigned int rb_data_length(struct ringbuffer *p);
 unsigned int rb_left_space(struct ringbuffer *p);
 

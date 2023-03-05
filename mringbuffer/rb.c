@@ -22,7 +22,7 @@ void rb_init(struct ringbuffer *p, void *buf, unsigned int cap) {
     p->ridx = 0;
 }
 
-int rb_put(struct ringbuffer *p, void *buf, unsigned int len) {
+unsigned int rb_put(struct ringbuffer *p, void *buf, unsigned int len) {
     unsigned int idx;
     unsigned int ltoe;
     if ((p == NULL) || (buf == NULL)) {
@@ -52,7 +52,7 @@ int rb_put(struct ringbuffer *p, void *buf, unsigned int len) {
     return len;
 }
 
-int rb_get(struct ringbuffer *p, void *buf, unsigned int len) {
+unsigned int rb_get(struct ringbuffer *p, void *buf, unsigned int len) {
     unsigned int idx;
     unsigned int ltoe;
     if ((p == NULL) || (buf == NULL)) {
