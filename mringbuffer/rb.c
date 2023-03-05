@@ -43,7 +43,9 @@ int rb_put(struct ringbuffer *p, void *buf, unsigned int len) {
     // write first part (from index)
     _mem_cpy(p->buf + idx, buf, ltoe);
     // write left if have (from beginning)
-    _mem_cpy(p->buf, buf + ltoe, len - ltoe);
+    if (len != ltoe) {
+        _mem_cpy(p->buf, buf + ltoe, len - ltoe);
+    }
 
     p->widx += len;
 
@@ -71,7 +73,9 @@ int rb_get(struct ringbuffer *p, void *buf, unsigned int len) {
     // read first part (from index)
     _mem_cpy(buf, p->buf + idx, ltoe);
     // read left if have (from beginning)
-    _mem_cpy(buf + ltoe, p->buf, len - ltoe);
+    if (len != ltoe) {
+        _mem_cpy(buf + ltoe, p->buf, len - ltoe);
+    }
 
     p->ridx += len;
 
@@ -94,9 +98,5 @@ unsigned int rb_left_space(struct ringbuffer *p) {
 
 #include <string.h>
 static void _mem_cpy(void *dst, void *src, unsigned int len) {
-    if (len == 0) {
-        return;
-    }
-
     memcpy(dst, src, len);
 }
